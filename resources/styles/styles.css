@@ -20,8 +20,44 @@ body {
     min-width: 300px;
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid black;
-    padding: 10px;
+    padding: 10px 15px;
 }
+
+#last-checkin > h1 {
+    color: #000;
+    font-weight: 100;
+    margin: 0;
+}
+
+#last-checkin > .ago {
+    color: red;
+    float: left;
+    margin-top: -15px;
+    min-height: 125px;
+    min-width: 115px;
+    text-align: center;
+}
+
+#last-checkin > .ago .number {
+    font-size: 96px;
+    font-weight: 200;
+    margin-bottom: -15px;
+}
+
+#last-checkin > .ago .ago-text {
+    font-weight: 100;
+}
+
+#last-checkin > .last-checkin-details {
+    font-size: 14px;
+    margin-top: 10px;
+    padding-left: 45%;
+}
+
+#last-checkin > .last-checkin-details > p {
+    margin: 0 0 10px 0;
+}
+
 
 div.checkin-time {
     font-weight: bold;
