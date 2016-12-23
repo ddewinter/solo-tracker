@@ -1,4 +1,5 @@
 import * as ngc from '@angular/core';
+import * as moment from 'moment';
 
 import { PersonTrackerService } from '../services/person-tracker.service';
 import { CheckinLocation } from '../model/checkin-location';
@@ -12,8 +13,9 @@ export class AppComponent implements ngc.AfterViewInit {
     @ngc.ViewChild('map') private mapElementRef: ngc.ElementRef
 
     private map: google.maps.Map;
-    private pathLines: Array<google.maps.Polyline> = new Array<google.maps.Polyline>();
-    private checkinLocations: Array<google.maps.Marker> = new Array<google.maps.Marker>();
+    private pathLines = new Array<google.maps.Polyline>();
+    private checkinLocations= new Array<google.maps.Marker>();
+    private infoWindows = new Array<google.maps.InfoWindow>();
 
     constructor(private personTrackerService: PersonTrackerService) {
         window['initMap'] = () => {
@@ -94,6 +96,21 @@ export class AppComponent implements ngc.AfterViewInit {
             map: this.map
         });
 
+        let date = moment.unix(location.$key);
+        let dateString = date.format('MMM D H:mm:ss A')
+
+        let infoWindow = new google.maps.InfoWindow({
+            content: `<div class='checkin-time'>${dateString}</div><div class='checkin-location'>${location.address}</div>`
+        });
+
         this.checkinLocations.push(marker);
+
+        marker.addListener('mouseover', () => {
+            infoWindow.open(this.map, marker);
+        });
+
+        marker.addListener('mouseout', () => {
+            infoWindow.close();
+        });
     }
 }

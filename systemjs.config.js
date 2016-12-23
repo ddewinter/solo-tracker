@@ -19,6 +19,7 @@
             // other libraries
             'angularfire2':               'npm:angularfire2/bundles/angularFire2.umd.js',
             'firebase':                   'npm:angularfire2/node_modules/firebase/firebase.js',
+            'moment':                     'npm:moment/moment.js',
             'rxjs':                       'npm:rxjs',
             
         },

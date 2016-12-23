@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ngc = require('@angular/core');
+var moment = require('moment');
 var person_tracker_service_1 = require('../services/person-tracker.service');
 var AppComponent = (function () {
     function AppComponent(personTrackerService) {
@@ -16,6 +17,7 @@ var AppComponent = (function () {
         this.personTrackerService = personTrackerService;
         this.pathLines = new Array();
         this.checkinLocations = new Array();
+        this.infoWindows = new Array();
         window['initMap'] = function () {
             _this.map = new google.maps.Map(_this.mapElementRef.nativeElement, {
                 // Tiger Mountain
@@ -72,6 +74,7 @@ var AppComponent = (function () {
         this.pathLines.push(polyline);
     };
     AppComponent.prototype.addNewMarker = function (location) {
+        var _this = this;
         // TODO: Marker Caption: address and time
         var marker = new google.maps.Marker({
             position: {
@@ -80,7 +83,18 @@ var AppComponent = (function () {
             },
             map: this.map
         });
+        var date = moment.unix(location.$key);
+        var dateString = date.format('MMM D H:mm:ss A');
+        var infoWindow = new google.maps.InfoWindow({
+            content: "<div class='checkin-time'>" + dateString + "</div><div class='checkin-location'>" + location.address + "</div>"
+        });
         this.checkinLocations.push(marker);
+        marker.addListener('mouseover', function () {
+            infoWindow.open(_this.map, marker);
+        });
+        marker.addListener('mouseout', function () {
+            infoWindow.close();
+        });
     };
     __decorate([
         ngc.ViewChild('mapContainer'), 
