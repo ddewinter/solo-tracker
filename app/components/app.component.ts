@@ -2,7 +2,7 @@ import * as ngc from '@angular/core';
 import * as moment from 'moment';
 
 import { PersonTrackerService } from '../services/person-tracker.service';
-import { CheckinLocation } from '../model/checkin-location';
+import { CheckinLocation } from '../../model/checkin-location';
 
 @ngc.Component({
     selector: 'solo-tracker',
@@ -88,20 +88,21 @@ export class AppComponent implements ngc.AfterViewInit {
         this.pathLines.push(polyline);
     }
 
-    private addNewMarker(location: CheckinLocation) {
+    private addNewMarker(checkin: CheckinLocation) {
         let marker = new google.maps.Marker({
             position: {
-                lat: location.lat,
-                lng: location.lng
+                lat: checkin.lat,
+                lng: checkin.lng
             },
             map: this.map
         });
 
-        let date = moment.unix(location.$key);
+        let date = moment.unix(checkin.$key);
         let dateString = date.format('MMM D H:mm:ss A')
 
         let infoWindow = new google.maps.InfoWindow({
-            content: `<div class='checkin-time'>${dateString}</div><div class='checkin-location'>${location.address}</div>`
+            content: `<div class='checkin-time'>${dateString}</div><div class='checkin-location'>${checkin.location}</div>
+            <div class='checkin-area'>${checkin.area}</div><div class='checkin-latlng'>${checkin.lat}, ${checkin.lng}</div>`
         });
 
         this.checkinLocations.push(marker);

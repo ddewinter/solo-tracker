@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import * as af from 'angularfire2';
 
-import { CheckinLocation } from '../model/checkin-location';
+import { CheckinLocation } from '../../model/checkin-location';
 
 @Injectable()
 export class PersonTrackerService {

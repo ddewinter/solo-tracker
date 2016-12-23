@@ -74,19 +74,19 @@ var AppComponent = (function () {
         });
         this.pathLines.push(polyline);
     };
-    AppComponent.prototype.addNewMarker = function (location) {
+    AppComponent.prototype.addNewMarker = function (checkin) {
         var _this = this;
         var marker = new google.maps.Marker({
             position: {
-                lat: location.lat,
-                lng: location.lng
+                lat: checkin.lat,
+                lng: checkin.lng
             },
             map: this.map
         });
-        var date = moment.unix(location.$key);
+        var date = moment.unix(checkin.$key);
         var dateString = date.format('MMM D H:mm:ss A');
         var infoWindow = new google.maps.InfoWindow({
-            content: "<div class='checkin-time'>" + dateString + "</div><div class='checkin-location'>" + location.address + "</div>"
+            content: "<div class='checkin-time'>" + dateString + "</div><div class='checkin-location'>" + checkin.location + "</div>\n            <div class='checkin-area'>" + checkin.area + "</div><div class='checkin-latlng'>" + checkin.lat + ", " + checkin.lng + "</div>"
         });
         this.checkinLocations.push(marker);
         marker.addListener('mouseover', function () {

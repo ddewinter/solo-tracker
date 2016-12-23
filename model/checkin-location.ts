@@ -2,5 +2,6 @@ export interface CheckinLocation {
     $key: number;
     lat: number;
     lng: number;
-    address: string;
+    location: string;
+    area: string;
 }
