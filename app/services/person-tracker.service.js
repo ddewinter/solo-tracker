@@ -10,12 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var af = require('angularfire2');
+var checkin_location_1 = require('../../model/checkin-location');
 var PersonTrackerService = (function () {
     function PersonTrackerService(ngFire) {
         this.checkins = ngFire.database.list('/checkins');
     }
     PersonTrackerService.prototype.subscribe = function (subscription) {
-        this.checkins.subscribe(subscription);
+        this.checkins.subscribe(function (items) { return subscription(items.map(function (i) { return new checkin_location_1.CheckinLocation(i); })); });
     };
     PersonTrackerService = __decorate([
         core_1.Injectable(), 

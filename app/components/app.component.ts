@@ -17,6 +17,9 @@ export class AppComponent implements ngc.AfterViewInit {
     private checkinLocations= new Array<google.maps.Marker>();
     private infoWindows = new Array<google.maps.InfoWindow>();
 
+    // HACK: Initial value used for detecting changes
+    public lastCheckin: CheckinLocation = new CheckinLocation({ $key: 1234123422 });
+
     constructor(private personTrackerService: PersonTrackerService) {
         window['initMap'] = () => {
             this.map = new google.maps.Map(this.mapElementRef.nativeElement, {
@@ -61,6 +64,7 @@ export class AppComponent implements ngc.AfterViewInit {
             }
         }
 
+        this.lastCheckin = locations[locations.length - 1];
         this.map.setCenter(this.checkinLocations[this.checkinLocations.length - 1].getPosition());
     }
 
@@ -97,11 +101,8 @@ export class AppComponent implements ngc.AfterViewInit {
             map: this.map
         });
 
-        let date = moment.unix(checkin.$key);
-        let dateString = date.format('MMM D H:mm:ss A')
-
         let infoWindow = new google.maps.InfoWindow({
-            content: `<div class='checkin-time'>${dateString}</div><div class='checkin-location'>${checkin.location}</div>
+            content: `<div class='checkin-time'>${checkin.formatDate()}</div><div class='checkin-location'>${checkin.location}</div>
             <div class='checkin-area'>${checkin.area}</div><div class='checkin-latlng'>${checkin.lat}, ${checkin.lng}</div>`
         });
 

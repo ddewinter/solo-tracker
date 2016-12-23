@@ -1,5 +1,10 @@
 body {
+    font-family: 'Helvetica Neue', Tahoma, Geneva, Verdana, sans-serif;    
     margin: 0;
+}
+
+#map-container {
+    position: relative;
 }
 
 #map {
@@ -7,10 +12,20 @@ body {
     height: 100%;
 }
 
+#last-checkin {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 5%;
+    min-width: 300px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    padding: 10px;
+}
+
 div.checkin-time {
     font-weight: bold;
     font-size: 18px;
-    font-family: 'Helvetica Neue', Tahoma, Geneva, Verdana, sans-serif;
     padding-bottom: 5px;
 }
 

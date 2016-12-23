@@ -29,6 +29,9 @@
                 main: './main.js',
                 defaultExtension: 'js'
             },
+            model: {
+                defaultExtension: 'js'
+            },
             rxjs: {
                 defaultExtension: 'js'
             },

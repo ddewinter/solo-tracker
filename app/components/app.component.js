@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ngc = require('@angular/core');
-var moment = require('moment');
 var person_tracker_service_1 = require('../services/person-tracker.service');
+var checkin_location_1 = require('../../model/checkin-location');
 var AppComponent = (function () {
     function AppComponent(personTrackerService) {
         var _this = this;
@@ -18,6 +18,8 @@ var AppComponent = (function () {
         this.pathLines = new Array();
         this.checkinLocations = new Array();
         this.infoWindows = new Array();
+        // HACK: Initial value used for detecting changes
+        this.lastCheckin = new checkin_location_1.CheckinLocation({ $key: 1234123422 });
         window['initMap'] = function () {
             _this.map = new google.maps.Map(_this.mapElementRef.nativeElement, {
                 // Tiger Mountain
@@ -51,6 +53,7 @@ var AppComponent = (function () {
                 this.addNewPathLine(location_1, locations[i - 1]);
             }
         }
+        this.lastCheckin = locations[locations.length - 1];
         this.map.setCenter(this.checkinLocations[this.checkinLocations.length - 1].getPosition());
     };
     AppComponent.prototype.addNewPathLine = function (location, lastLocation) {
@@ -83,10 +86,8 @@ var AppComponent = (function () {
             },
             map: this.map
         });
-        var date = moment.unix(checkin.$key);
-        var dateString = date.format('MMM D H:mm:ss A');
         var infoWindow = new google.maps.InfoWindow({
-            content: "<div class='checkin-time'>" + dateString + "</div><div class='checkin-location'>" + checkin.location + "</div>\n            <div class='checkin-area'>" + checkin.area + "</div><div class='checkin-latlng'>" + checkin.lat + ", " + checkin.lng + "</div>"
+            content: "<div class='checkin-time'>" + checkin.formatDate() + "</div><div class='checkin-location'>" + checkin.location + "</div>\n            <div class='checkin-area'>" + checkin.area + "</div><div class='checkin-latlng'>" + checkin.lat + ", " + checkin.lng + "</div>"
         });
         this.checkinLocations.push(marker);
         marker.addListener('mouseover', function () {

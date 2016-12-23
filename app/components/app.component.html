@@ -1,3 +1,15 @@
 <div id="map-container" #mapContainer>
     <div id="map" #map></div>
+    <div id="last-checkin">
+        <h1>Last Check-In</h1>
+        <div class="last-checkin-ago">
+            <div class="number">{{lastCheckin.agoNumber()}}</div>
+            <div class="ago-text">{{lastCheckin.agoText()}}</div>
+        </div>
+        <div class="last-checkin-details">
+            <div class='checkin-location'>{{lastCheckin.location}}</div>
+            <div class='checkin-area'>{{lastCheckin.area}}</div>
+            <div class='checkin-latlng'>{{lastCheckin.lat}}, {{lastCheckin.lng}}</div>
+        </div>
+    </div>
 </div>

@@ -13,6 +13,6 @@ export class PersonTrackerService {
     }
     
     subscribe(subscription: (locations: CheckinLocation[]) => void) {
-        this.checkins.subscribe(subscription);
+        this.checkins.subscribe(items => subscription(items.map(i => new CheckinLocation(i))));
     }
 }
