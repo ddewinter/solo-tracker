@@ -51,6 +51,7 @@ var AppComponent = (function () {
                 this.addNewPathLine(location_1, locations[i - 1]);
             }
         }
+        this.map.setCenter(this.checkinLocations[this.checkinLocations.length - 1].getPosition());
     };
     AppComponent.prototype.addNewPathLine = function (location, lastLocation) {
         var coordinates = [

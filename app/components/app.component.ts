@@ -60,6 +60,8 @@ export class AppComponent implements ngc.AfterViewInit {
                 this.addNewPathLine(location, locations[i - 1]);
             }
         }
+
+        this.map.setCenter(this.checkinLocations[this.checkinLocations.length - 1].getPosition());
     }
 
     private addNewPathLine(location: CheckinLocation, lastLocation: CheckinLocation) {
