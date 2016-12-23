@@ -1,18 +1,30 @@
 import * as ngc from '@angular/core';
 
+import { PersonTrackerService }     from '../services/person-tracker.service';
+
 @ngc.Component({
     selector: 'solo-tracker',
     templateUrl: 'app/components/app.component.html',
 })
 export class AppComponent implements ngc.AfterViewInit {
-    @ngc.ViewChild('mapContainer') mapContainerElementRef: ngc.ElementRef
-    @ngc.ViewChild('map') mapElementRef: ngc.ElementRef
+    @ngc.ViewChild('mapContainer') private mapContainerElementRef: ngc.ElementRef
+    @ngc.ViewChild('map') private mapElementRef: ngc.ElementRef
 
-    constructor() {
+    private map: google.maps.Map;
+    private path: Array<google.maps.Polyline>;
+    private checkinLocations: Array<google.maps.Marker>;
+
+
+    constructor(private personTrackerService: PersonTrackerService) {
         window['initMap'] = () => {
-            this.mapElementRef.nativeElement = new google.maps.Map(this.mapElementRef.nativeElement, {
+            this.map = new google.maps.Map(this.mapElementRef.nativeElement, {
+                // Tiger Mountain
                 center: { lat: 47.4883, lng: -121.9467 },
                 zoom: 12
+            });
+
+            this.personTrackerService.subscribe(locations => {
+
             });
         };
     }

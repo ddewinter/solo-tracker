@@ -9,13 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var ngc = require('@angular/core');
+var person_tracker_service_1 = require('../services/person-tracker.service');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(personTrackerService) {
         var _this = this;
+        this.personTrackerService = personTrackerService;
         window['initMap'] = function () {
-            _this.mapElementRef.nativeElement = new google.maps.Map(_this.mapElementRef.nativeElement, {
+            _this.map = new google.maps.Map(_this.mapElementRef.nativeElement, {
+                // Tiger Mountain
                 center: { lat: 47.4883, lng: -121.9467 },
                 zoom: 12
+            });
+            _this.personTrackerService.subscribe(function (locations) {
             });
         };
     }
@@ -46,7 +51,7 @@ var AppComponent = (function () {
             selector: 'solo-tracker',
             templateUrl: 'app/components/app.component.html',
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [person_tracker_service_1.PersonTrackerService])
     ], AppComponent);
     return AppComponent;
 }());

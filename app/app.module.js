@@ -12,15 +12,25 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
 var app_component_1 = require('./components/app.component');
+var angularfire2_1 = require('angularfire2');
+var person_tracker_service_1 = require('./services/person-tracker.service');
+// Must export the config
+exports.firebaseConfig = {
+    apiKey: "AIzaSyBFGJHlZ7VUtRRx___nCDiCk2kRQCbtMNc",
+    authDomain: "solotracker-61ff4.firebaseapp.com",
+    databaseURL: "https://solotracker-61ff4.firebaseio.com/",
+    storageBucket: "solotracker-61ff4.appspot.com",
+    messagingSenderId: "791720776314"
+};
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, http_1.HttpModule],
+            imports: [platform_browser_1.BrowserModule, http_1.HttpModule, angularfire2_1.AngularFireModule.initializeApp(exports.firebaseConfig)],
             declarations: [app_component_1.AppComponent],
             bootstrap: [app_component_1.AppComponent],
-            providers: []
+            providers: [person_tracker_service_1.PersonTrackerService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
