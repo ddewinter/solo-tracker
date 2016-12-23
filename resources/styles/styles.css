@@ -30,7 +30,6 @@ body {
 }
 
 #last-checkin > .ago {
-    color: red;
     float: left;
     margin-top: -15px;
     min-height: 125px;
@@ -45,17 +44,22 @@ body {
 }
 
 #last-checkin > .ago .ago-text {
-    font-weight: 100;
+    font-weight: 200;
 }
 
 #last-checkin > .last-checkin-details {
     font-size: 14px;
+    font-weight: 200;
     margin-top: 10px;
     padding-left: 45%;
 }
 
 #last-checkin > .last-checkin-details > p {
-    margin: 0 0 10px 0;
+    margin: 0;
+}
+
+#last-checkin > .last-checkin-details > p:last-child {
+    margin-top: 10px;
 }
 
 
