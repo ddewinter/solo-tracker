@@ -14,14 +14,15 @@ var AppComponent = (function () {
     function AppComponent(personTrackerService) {
         var _this = this;
         this.personTrackerService = personTrackerService;
+        this.pathLines = new Array();
+        this.checkinLocations = new Array();
         window['initMap'] = function () {
             _this.map = new google.maps.Map(_this.mapElementRef.nativeElement, {
                 // Tiger Mountain
                 center: { lat: 47.4883, lng: -121.9467 },
-                zoom: 12
+                zoom: 11
             });
-            _this.personTrackerService.subscribe(function (locations) {
-            });
+            _this.personTrackerService.subscribe(function (locations) { return _this.onNewLocations(locations); });
         };
     }
     AppComponent.prototype.ngAfterViewInit = function () {
@@ -37,6 +38,49 @@ var AppComponent = (function () {
         var height = Math.min(document.documentElement.clientHeight, window.innerHeight || 0);
         mapElement.style.width = width;
         mapElement.style.height = height;
+    };
+    AppComponent.prototype.onNewLocations = function (locations) {
+        var currentLocationCount = this.checkinLocations.length;
+        var newLocationCount = locations.length;
+        for (var i = currentLocationCount; i < newLocationCount; ++i) {
+            var location_1 = locations[i];
+            this.addNewMarker(location_1);
+            if (i > 0) {
+                this.addNewPathLine(location_1, locations[i - 1]);
+            }
+        }
+    };
+    AppComponent.prototype.addNewPathLine = function (location, lastLocation) {
+        var coordinates = [
+            {
+                lat: lastLocation.lat,
+                lng: lastLocation.lng
+            },
+            {
+                lat: location.lat,
+                lng: location.lng
+            }
+        ];
+        var polyline = new google.maps.Polyline({
+            path: coordinates,
+            geodesic: true,
+            strokeColor: '#FF8000',
+            strokeOpacity: 1,
+            strokeWeight: 4,
+            map: this.map
+        });
+        this.pathLines.push(polyline);
+    };
+    AppComponent.prototype.addNewMarker = function (location) {
+        // TODO: Marker Caption: address and time
+        var marker = new google.maps.Marker({
+            position: {
+                lat: location.lat,
+                lng: location.lng
+            },
+            map: this.map
+        });
+        this.checkinLocations.push(marker);
     };
     __decorate([
         ngc.ViewChild('mapContainer'), 
