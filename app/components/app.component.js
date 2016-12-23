@@ -75,7 +75,6 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.addNewMarker = function (location) {
         var _this = this;
-        // TODO: Marker Caption: address and time
         var marker = new google.maps.Marker({
             position: {
                 lat: location.lat,

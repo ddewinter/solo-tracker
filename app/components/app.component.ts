@@ -87,7 +87,6 @@ export class AppComponent implements ngc.AfterViewInit {
     }
 
     private addNewMarker(location: CheckinLocation) {
-        // TODO: Marker Caption: address and time
         let marker = new google.maps.Marker({
             position: {
                 lat: location.lat,
