@@ -3,6 +3,7 @@ import { BrowserModule }                     from '@angular/platform-browser';
 import { HttpModule }                        from '@angular/http';
 
 import { AppComponent }                      from './components/app.component';
+import { LastCheckinCardComponent }          from './components/last-checkin-card.component';
 
 import { AngularFireModule }                 from 'angularfire2';
 
@@ -19,7 +20,7 @@ export const firebaseConfig = {
 
 @NgModule ({
     imports:      [ BrowserModule, HttpModule, AngularFireModule.initializeApp(firebaseConfig) ],
-    declarations: [ AppComponent ],
+    declarations: [ AppComponent, LastCheckinCardComponent ],
     bootstrap:    [ AppComponent ],
     providers:    [ PersonTrackerService ]
 })

@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
 var app_component_1 = require('./components/app.component');
+var last_checkin_card_component_1 = require('./components/last-checkin-card.component');
 var angularfire2_1 = require('angularfire2');
 var person_tracker_service_1 = require('./services/person-tracker.service');
 // Must export the config
@@ -28,7 +29,7 @@ var AppModule = (function () {
     AppModule = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule, http_1.HttpModule, angularfire2_1.AngularFireModule.initializeApp(exports.firebaseConfig)],
-            declarations: [app_component_1.AppComponent],
+            declarations: [app_component_1.AppComponent, last_checkin_card_component_1.LastCheckinCardComponent],
             bootstrap: [app_component_1.AppComponent],
             providers: [person_tracker_service_1.PersonTrackerService]
         }), 
